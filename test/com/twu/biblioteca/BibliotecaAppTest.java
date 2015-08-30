@@ -12,4 +12,13 @@ public class BibliotecaAppTest {
 
         assertEquals("Welcome to Biblioteca!!", bib.welcomeMessage());
     }
+
+    @Test
+    public void shouldHaveAListOfBooks() {
+        BibliotecaApp bib = new BibliotecaApp();
+
+        assertEquals(bib.booksList(), true);
+    }
+
+
 }
