@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class LibraryTest {
+public class BibliotecaAppTest {
 
     @Test
     public void shouldHaveWelcomeMessage() {
-        Library lib = new Library();
+        BibliotecaApp bib = new BibliotecaApp();
 
-        assertEquals(lib.welcomeMessage(), "Welcome to Biblioteca!!");
+        assertEquals("Welcome to Biblioteca!!", bib.welcomeMessage());
     }
 }

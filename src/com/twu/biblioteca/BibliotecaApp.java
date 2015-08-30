@@ -2,7 +2,17 @@ package com.twu.biblioteca;
 
 public class BibliotecaApp {
 
+    private String welcomeMessage;
+
+    public String welcomeMessage() {
+        welcomeMessage = "Welcome to Biblioteca!!";
+        return welcomeMessage;
+    }
+
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+
+        BibliotecaApp bib = new BibliotecaApp();
+        System.out.println(bib.welcomeMessage());
+
     }
 }
