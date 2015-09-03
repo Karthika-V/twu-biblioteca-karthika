@@ -10,9 +10,9 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldHaveWelcomeMessage() {
-        BibliotecaApp bib = new BibliotecaApp();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
 
-        assertEquals("Welcome to Biblioteca!!", bib.welcomeMessage());
+        assertEquals("Welcome to Biblioteca!!", bibliotecaApp.printData("Welcome to Biblioteca!!"));
     }
 
     @Test

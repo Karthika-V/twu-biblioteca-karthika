@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class BibliotecaApp {
 
-    private String welcomeMessage;
+    private String message;
 
-    public String welcomeMessage() {
-        welcomeMessage = "Welcome to Biblioteca!!";
-        return welcomeMessage;
+    public String printData(String message) {
+        this.message = message;
+        return message;
     }
 
     public ArrayList booksList() {
@@ -21,6 +21,6 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
-        System.out.println(bibliotecaApp.welcomeMessage());
+        System.out.println(bibliotecaApp.printData("Welcome to Bibiloteca!!"));
     }
 }
