@@ -18,8 +18,18 @@ public class BibliotecaAppTest {
     @Test
     public void shouldHaveAListOfBooks() {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
+
         ArrayList<String> booksList = bibliotecaApp.booksList();
 
         assertEquals(true, !(booksList.isEmpty()));
+    }
+
+    @Test
+    public void shouldRetrieveTheListOfBooks() {
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+
+        ArrayList<String> booksList = bibliotecaApp.booksList();
+
+        assertEquals(true, true);
     }
 }
