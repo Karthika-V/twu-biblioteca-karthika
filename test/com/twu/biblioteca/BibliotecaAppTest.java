@@ -14,13 +14,4 @@ public class BibliotecaAppTest {
 
         assertEquals("Welcome to Biblioteca!!", bib.welcomeMessage());
     }
-
-    @Test
-    public void shouldHaveAListOfBooks() {
-        BibliotecaApp bibliotecaApp = new BibliotecaApp();
-        ArrayList<String> booksList = bibliotecaApp.booksList();
-
-        assertEquals(true, !(booksList.isEmpty()));
-    }
-
 }
