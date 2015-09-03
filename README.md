@@ -1,8 +1,10 @@
 ##Problem Description
-    A calculator which accepts add, subtract, multiply, divide, cancel and exit as commands.
+    Biblioteca is a Library Management System.
 
 ##How to setup the dev environment
     - Any OS
     - Install jdk
     - Install ant
+    
+    
 

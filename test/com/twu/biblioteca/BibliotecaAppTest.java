@@ -2,6 +2,8 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class BibliotecaAppTest {
@@ -15,10 +17,10 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldHaveAListOfBooks() {
-        BibliotecaApp bib = new BibliotecaApp();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        ArrayList<String> booksList = bibliotecaApp.booksList();
 
-        assertEquals(bib.booksList(), true);
+        assertEquals(true, !(booksList.isEmpty()));
     }
-
 
 }
