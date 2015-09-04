@@ -1,4 +1,4 @@
-//Launches Biblioteca Application and display Welcome Message.
+//Launches Biblioteca Application and display Welcome Message and List of Books
 package com.twu.biblioteca;
 
 public class BibliotecaApp {
@@ -8,11 +8,14 @@ public class BibliotecaApp {
         bibliotecaApp.start();
     }
 
-    public void display() {
-        System.out.println("Welcome to Biblioteca!!!");
+    public void display(String message) {
+        System.out.println(message);
     }
 
     public void start() {
-        display();
+        display("Welcome to Biblioteca!!!");
+        display("List of Books:");
+        Book book = new Book();
+        book.display();
     }
 }

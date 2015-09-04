@@ -15,5 +15,4 @@ public class BookTest {
 
         assertEquals(true, !(bookList.isEmpty()));
     }
-
 }
