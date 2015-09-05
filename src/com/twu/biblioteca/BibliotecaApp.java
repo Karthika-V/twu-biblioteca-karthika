@@ -1,6 +1,8 @@
 //Launches Biblioteca Application and display Welcome Message and List of Books
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
+
 public class BibliotecaApp {
 
     public static void main(String[] args) {
@@ -15,7 +17,11 @@ public class BibliotecaApp {
     public void start() {
         display("Welcome to Biblioteca!!!");
         display("List of Books:");
-        Book book = new Book();
-        book.display();
+        BookList bookList = new BookList();
+        ArrayList<Book> listOfBooks = bookList.listOfBooks();
+        display(bookList.displayHeader());
+        for(Book book:listOfBooks) {
+            display(book.toString());
+        }
     }
 }
