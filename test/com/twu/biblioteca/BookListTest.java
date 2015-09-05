@@ -9,7 +9,7 @@ public class BookListTest {
     @Test
     public void shouldHaveAListOfBooks() {
         BookList bookList = new BookList();
-        assertEquals(true, !(bookList.toString().isEmpty()));
+
     }
 
 }

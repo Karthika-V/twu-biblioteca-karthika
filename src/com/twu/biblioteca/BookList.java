@@ -1,4 +1,4 @@
-//Booklist have a list of books and header
+//Booklist have a list of books and header information
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
