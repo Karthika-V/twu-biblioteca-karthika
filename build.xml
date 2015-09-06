@@ -1,3 +1,4 @@
+<taskdef name="codecover" classname="org.codecover.ant.CodecoverTask" classpath="${codecoverDir}/lib/codecover-ant.jar" />
 <project name="com.twu.biblioteca" default="runTest" basedir=".">
 
     <property name="project.name" value="TWU_Biblioteca-master"></property>
@@ -36,8 +37,14 @@
         </junit>
     </target>
 
-    <target name="clean">
+    <target name="clean" description="clean previous output directory">
         <delete dir="out"/>
+        <delete>
+            <fileset dir="." includes="*.clf"/>
+        </delete>
+        <delete file="codecover.xml"/>
+        <delete file="report.html"/>
+        <delete dir="report.html-files"/>
     </target>
 
     <target name="buildJar" depends="compile">
@@ -57,4 +64,41 @@
             </classpath>
         </java>
     </target>
+
+    <target name="instrument-sources" depends="clean">
+        <codecover>
+            <instrument containerId="c" language="java" destination="instrumented-out" charset="utf-8" copyUninstrumented="yes">
+                <source dir="src">
+                    <include name="**/*.java"/>
+                </source>
+            </instrument>
+            <save containerId="c" filename="codecover.xml"/>
+        </codecover>
+    </target>
+
+    <target name="compile-instrumented" depends="instrument-sources">
+        <javac srcdir="instrumented-out" destdir="instrumented-out" encoding="utf-8" target="1.5" debug="true" classpath="lib/codecover-batch-1.0/lib/codecover-instrumentation-java.jar" includeAntRuntime="false"></javac>
+    </target>
+
+    <target name="run-instrumented" depends="compile-instrumented">
+        <java classpath="instrumented-out:lib/codecover-batch-1.0/lib/codecover-instrumentation-java.jar" fork="true" failonerror="true" classname="com.thoughtworks.salestax.MainApp">
+            <jvmarg value="-Dorg.codecover.coverage-log-file=test.clf"/>
+        </java>
+    </target>
+
+    <target name="create-report" depends="run-instrumented">
+        <codecover>
+            <load containerId="c" filename="codecover.xml"/>
+            <analyze containerId="c" coverageLog="test.clf" name="Test Session"/>
+            <save containerId="c" filename="codecover.xml"/>
+            <report containerId="c" destination="report.html" template="lib/codecover-batch-1.0/report-templates/HTML_Report_hierarchic.xml">
+                <testCases>
+                    <testSession pattern=".*">
+                        <testCase pattern=".*"/>
+                    </testSession>
+                </testCases>
+            </report>
+        </codecover>
+    </target>
+
 </project>
