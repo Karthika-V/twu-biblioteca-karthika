@@ -2,6 +2,10 @@
 
     <property name="project.name" value="TWU_Biblioteca-master"></property>
     <property name="package.name" value="com.twu.biblioteca"/>
+    <property name="codecoverDir" value="/usr/local/share/java/codecover"/>
+    <property name="sourceDir" value="src"/>
+    <property name="instrumentedSourceDir" value="instrumented"/>
+    <property name="mainClassName" value="BibliotecaApp.java"/>
 
     <target name = "init">
         <mkdir dir="out" />

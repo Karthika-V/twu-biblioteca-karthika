@@ -1,7 +1,7 @@
-//Launches Biblioteca Application and display Welcome Message and List of Books
+//Launches Biblioteca Application and display Welcome Message and Menu for options
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BibliotecaApp {
 
@@ -10,18 +10,19 @@ public class BibliotecaApp {
         bibliotecaApp.start();
     }
 
+    public String inputChoice() {
+        Scanner in = new Scanner(System.in);
+        return (in.next());
+    }
+
     public void display(String message) {
         System.out.println(message);
     }
 
     public void start() {
         display("Welcome to Biblioteca!!!");
-        display("List of Books:");
-        BookList bookList = new BookList();
-        ArrayList<Book> listOfBooks = bookList.listOfBooks();
-        display(bookList.displayHeader());
-        for(Book book:listOfBooks) {
-            display(book.toString());
-        }
+        BibliotecaMenu bibliotecaMenu = new BibliotecaMenu();
+        display(bibliotecaMenu.toString());
+        bibliotecaMenu.choiceHandler(inputChoice());
     }
 }
