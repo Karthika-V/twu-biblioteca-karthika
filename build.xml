@@ -81,7 +81,7 @@
     </target>
 
     <target name="run-instrumented" depends="compile-instrumented">
-        <java classpath="instrumented-out:lib/codecover-batch-1.0/lib/codecover-instrumentation-java.jar" fork="true" failonerror="true" classname="com.thoughtworks.salestax.MainApp">
+        <java classpath="instrumented-out:lib/codecover-batch-1.0/lib/codecover-instrumentation-java.jar" fork="true" failonerror="true" classname="com.twu.biblioteca.BibliotecaApp">
             <jvmarg value="-Dorg.codecover.coverage-log-file=test.clf"/>
         </java>
     </target>
