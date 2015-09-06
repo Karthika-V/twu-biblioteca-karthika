@@ -10,6 +10,9 @@ public class BibliotecaMenu {
             BookList bookList = new BookList();
             bookList.displayBooklistDetails();
         }
+        else{
+            System.out.println("Select a valid option!");
+        }
     }
 
     @Override
