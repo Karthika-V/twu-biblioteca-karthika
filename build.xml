@@ -1,4 +1,3 @@
-<taskdef name="codecover" classname="org.codecover.ant.CodecoverTask" classpath="${codecoverDir}/lib/codecover-ant.jar" />
 <project name="com.twu.biblioteca" default="runTest" basedir=".">
 
     <property name="project.name" value="TWU_Biblioteca-master"></property>
@@ -7,6 +6,7 @@
     <property name="sourceDir" value="src"/>
     <property name="instrumentedSourceDir" value="instrumented"/>
     <property name="mainClassName" value="BibliotecaApp.java"/>
+    <taskdef name="codecover" classname="org.codecover.ant.CodecoverTask" classpath="lib/codecover-batch-1.0/lib/codecover-ant.jar" />
 
     <target name = "init">
         <mkdir dir="out" />
