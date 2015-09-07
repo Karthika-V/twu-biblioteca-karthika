@@ -7,6 +7,7 @@ import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
@@ -24,8 +25,8 @@ public class BibliotecaAppTest {
     @Test
     public void shouldHaveMenuToTakeUserChoiceForBibiliotecaApplication() {
         BibliotecaApp mockedBibliotecaApp = mock(BibliotecaApp.class);
-        mockedBibliotecaApp.inputChoice();
-        verify(mockedBibliotecaApp).inputChoice();
+        mockedBibliotecaApp.inputOption();
+        verify(mockedBibliotecaApp, times(1)).inputOption();
     }
 
     @Test

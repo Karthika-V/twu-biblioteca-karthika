@@ -10,7 +10,7 @@ public class BibliotecaApp {
         bibliotecaApp.start();
     }
 
-    public String inputChoice() {
+    public String inputOption() {
         Scanner in = new Scanner(System.in);
         return (in.next());
     }
@@ -21,8 +21,10 @@ public class BibliotecaApp {
 
     public void start() {
         display("Welcome to Biblioteca!!!");
-        BibliotecaMenu bibliotecaMenu = new BibliotecaMenu();
-        display(bibliotecaMenu.toString());
-        bibliotecaMenu.choiceHandler(inputChoice());
+        MenuOptions menuOptions = new MenuOptions();
+        display(menuOptions.toString());
+        do {
+            menuOptions.optionHandler(inputOption());
+        } while (!(inputOption().contentEquals("q")));
     }
 }

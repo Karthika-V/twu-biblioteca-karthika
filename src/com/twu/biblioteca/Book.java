@@ -15,6 +15,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return (this.bookTitle+"\t"+this.bookAuthor+"\t"+this.publishedYear);
+        return (this.bookTitle + "\t" + this.bookAuthor + "\t" + this.publishedYear);
     }
 }
