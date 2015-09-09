@@ -17,4 +17,17 @@ public class Book {
     public String toString() {
         return (this.bookTitle + "\t" + this.bookAuthor + "\t" + this.publishedYear);
     }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) return true;
+        if (that == null || getClass() != that.getClass()) return false;
+        Book book = (Book) that;
+        return bookTitle.equals(book.bookTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        return bookTitle.hashCode();
+    }
 }

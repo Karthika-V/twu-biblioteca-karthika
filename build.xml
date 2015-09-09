@@ -20,6 +20,7 @@
             <classpath location="lib/hamcrest-core-1.3.jar"/>
             <classpath location="lib/mockito-all-1.9.5.jar"/>
             <classpath location="lib/system-rules-1.12.0.jar"/>
+            <classpath location="lib/codecover-batch-1.0/lib/codecover-ant.jar"/>
         </javac>
     </target>
 
@@ -30,6 +31,7 @@
                 <pathelement location="lib/hamcrest-core-1.3.jar"/>
                 <pathelement location="lib/mockito-all-1.9.5.jar"/>
                 <pathelement location="lib/system-rules-1.12.0.jar"/>
+                <pathelement location="lib/codecover-batch-1.0/lib/codecover-ant.jar"/>
                 <pathelement location="out"/>
             </classpath>
 
@@ -88,7 +90,7 @@
 
     <target name="run-instrumented" depends="compile-instrumented">
         <java classpath="instrumented-out:lib/codecover-batch-1.0/lib/codecover-instrumentation-java.jar" fork="true"
-              failonerror="true" classname="com.twu.biblioteca.BibliotecaApp">
+              failonerror="true" classname="com.twu.biblioteca.BibliotecaApplication">
             <jvmarg value="-Dorg.codecover.coverage-log-file=test.clf"/>
         </java>
     </target>
@@ -100,11 +102,6 @@
             <save containerId="c" filename="codecover.xml"/>
             <report containerId="c" destination="report.html"
                     template="lib/codecover-batch-1.0/report-templates/HTML_Report_hierarchic.xml">
-                <testCases>
-                    <testSession pattern=".*">
-                        <testCase pattern=".*"/>
-                    </testSession>
-                </testCases>
             </report>
         </codecover>
     </target>

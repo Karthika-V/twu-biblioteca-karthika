@@ -11,28 +11,31 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-public class BibliotecaAppTest {
+public class BibliotecaApplicationTest {
 
     @Test
     public void shouldShowAWelcomeMessageWhenApplicationLaunches() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        BibliotecaApp biblioteca = new BibliotecaApp();
-        biblioteca.start();
+        BibliotecaApplication bibliotecaApplication = new BibliotecaApplication();
+        bibliotecaApplication.displayWelcomeMessage();
+
         assertEquals("Welcome to Biblioteca!!!\n", outContent.toString());
     }
 
     @Test
     public void shouldHaveMenuToTakeUserChoiceForBibiliotecaApplication() {
-        BibliotecaApp mockedBibliotecaApp = mock(BibliotecaApp.class);
-        mockedBibliotecaApp.inputOption();
-        verify(mockedBibliotecaApp, times(1)).inputOption();
+        BibliotecaApplication mockedBibliotecaApplication = mock(BibliotecaApplication.class);
+        mockedBibliotecaApplication.inputOption();
+
+        verify(mockedBibliotecaApplication, times(1)).inputOption();
     }
 
     @Test
     public void shouldLaunchBibliotecaApplicationWhenStartIsInvoked() {
-        BibliotecaApp mockedBibliotecaApp = mock(BibliotecaApp.class);
-        mockedBibliotecaApp.start();
-        verify(mockedBibliotecaApp).start();
+        BibliotecaApplication mockedBibliotecaApplication = mock(BibliotecaApplication.class);
+        mockedBibliotecaApplication.start();
+
+        verify(mockedBibliotecaApplication, times(1)).start();
     }
 }
