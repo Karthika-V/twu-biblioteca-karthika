@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class LibraryTest {
 
@@ -46,5 +47,22 @@ public class LibraryTest {
         Library library = new Library();
         library.checkOutBook("Abcd");
         assertEquals("That book is not available.\n", outContent.toString());
+    }
+
+    @Test
+    public void shouldHaveAReturnBookOptionWhenUserChoosesReturnFromMenuWhichWasCheckedOutBefore() {
+        System.setOut(new PrintStream(outContent));
+        Library library = new Library();
+        library.checkOutBook("Harry Potter");
+        library.checkInBook(library.returnBook("Harry Potter"));
+        assertEquals("Thank You! Enjoy the Book\nThank You for Returning Book\n", outContent.toString());
+    }
+
+    @Test
+    public void shouldHaveUnsuccessfulReturnWhenUserChoosesABookWhichIsNotCheckedOutFromLibrary() {
+        System.setOut(new PrintStream(outContent));
+        Library library = new Library();
+        library.returnBook("Abcd");
+        assertEquals("That is not a Valid Book to Return\n", outContent.toString());
     }
 }

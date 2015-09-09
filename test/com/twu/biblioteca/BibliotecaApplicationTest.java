@@ -24,7 +24,7 @@ public class BibliotecaApplicationTest {
     }
 
     @Test
-    public void shouldHaveMenuToTakeUserChoiceForBibiliotecaApplication() {
+    public void shouldTakeUserInputForBibiliotecaApplication() {
         BibliotecaApplication mockedBibliotecaApplication = mock(BibliotecaApplication.class);
         mockedBibliotecaApplication.inputOption();
 
@@ -32,7 +32,7 @@ public class BibliotecaApplicationTest {
     }
 
     @Test
-    public void shouldLaunchBibliotecaApplicationWhenStartIsInvoked() {
+    public void shouldLaunchBibliotecaApplicationMenuWhenStartIsInvoked() {
         BibliotecaApplication mockedBibliotecaApplication = mock(BibliotecaApplication.class);
         mockedBibliotecaApplication.start();
 

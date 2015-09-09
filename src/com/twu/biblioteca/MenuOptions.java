@@ -30,7 +30,7 @@ public class MenuOptions {
         } else if (option.contentEquals("3")) {
             System.out.println("Enter the Book name:");
             String bookChoice = in.nextLine();
-            library.returnBook(bookChoice);
+            library.checkInBook(library.returnBook(bookChoice));
         } else {
             System.out.println("Select a valid option!");
         }
