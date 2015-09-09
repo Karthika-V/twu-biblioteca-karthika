@@ -1,4 +1,4 @@
-//Launches Biblioteca Application and display Welcome Message and Menu for options
+//Launches Biblioteca Application and display Welcome Message and Menu for getting user input
 package com.twu.biblioteca;
 
 import java.util.Scanner;
@@ -12,10 +12,6 @@ public class BibliotecaApplication {
         bibliotecaApplication.start();
     }
 
-    public String inputOption() {
-        return (in.nextLine());
-    }
-
     public void displayWelcomeMessage() {
         System.out.println("Welcome to Biblioteca!!!");
     }
@@ -25,7 +21,7 @@ public class BibliotecaApplication {
         MenuOptions menuOptions = new MenuOptions();
         do {
             System.out.println(menuOptions.toString());
-            menuOptions.optionHandler(inputOption());
+            menuOptions.optionHandler(in.nextLine());
         } while (true);
     }
 }
