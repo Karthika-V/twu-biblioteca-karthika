@@ -15,10 +15,14 @@ public class Library {
 
     public void displayLibraryBooks() {
         System.out.println("List of Books:");
-        System.out.println("Title\tAuthor\tPublished Year");
+        String divider = "------------------------------------------------------------";
+        System.out.println(divider);
+        System.out.println(String.format("%-23s %-23s %-23s","Title","Author","Published Year"));
+        System.out.println(divider);
         for (Book book : books) {
             System.out.println(book.toString());
         }
+        System.out.println(divider);
     }
 
     public void checkOutBook(String userChoice) {
@@ -53,7 +57,7 @@ public class Library {
     }
 
     public void checkInBook(Book book) {
-        if(checkedOutBooks.contains(book) && books.contains(book))
+        if (checkedOutBooks.contains(book) && books.contains(book))
             checkedOutBooks.remove(book);
     }
 }
