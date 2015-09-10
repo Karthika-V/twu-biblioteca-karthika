@@ -1,4 +1,4 @@
-//Menu gives a list of options to the user
+//Menu gives a list of options to the user and handles the option
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
