@@ -13,8 +13,7 @@ public class BibliotecaApplicationTest {
     public void shouldShowAWelcomeMessageWhenApplicationLaunches() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        BibliotecaApplication bibliotecaApplication = new BibliotecaApplication();
-        bibliotecaApplication.start();
+        new ConsoleView("Welcome to Biblioteca!!!");
 
         assertEquals("Welcome to Biblioteca!!!\n", outContent.toString());
     }

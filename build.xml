@@ -1,109 +1,112 @@
-<project name="com.twu.biblioteca" default="runTest" basedir=".">
+<?xml version = "1.0"?>
+<project name="TWU_Biblioteca-master" default="coverage" basedir=".">
 
-    <property name="project.name" value="TWU_Biblioteca-master"></property>
-    <property name="package.name" value="com.twu.biblioteca"/>
-    <property name="codecoverDir" value="/usr/local/share/java/codecover"/>
-    <property name="sourceDir" value="src"/>
-    <property name="instrumentedSourceDir" value="instrumented"/>
-    <property name="mainClassName" value="BibliotecaApp.java"/>
-    <taskdef name="codecover" classname="org.codecover.ant.CodecoverTask"
-             classpath="lib/codecover-batch-1.0/lib/codecover-ant.jar"/>
+    <property name = "project.name" value="TWU_Biblioteca-master" />
+    <property name = "main.name" value = "BibliotecaApplication"/>
+    <property name = "package.name" value="com.tw.biblioteca" />
 
-    <target name="init">
+    <path id="cobertura.classpath">
+        <fileset dir="lib/cobertura-2.1.1">
+            <include name="cobertura*.jar" />
+            <include name="lib/**/*.jar" />
+        </fileset>
+    </path>
+
+    <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+
+    <target name="build" depends="clean">
         <mkdir dir="out"/>
-    </target>
-
-    <target name="compile" depends="clean,init">
-        <javac destdir="out">
-            <src path="src:test"/>
-            <classpath location="lib/junit-4.12.jar"/>
-            <classpath location="lib/hamcrest-core-1.3.jar"/>
-            <classpath location="lib/mockito-all-1.9.5.jar"/>
-            <classpath location="lib/system-rules-1.12.0.jar"/>
-            <classpath location="lib/codecover-batch-1.0/lib/codecover-ant.jar"/>
-        </javac>
-    </target>
-
-    <target name="runTest" depends="compile">
-        <junit printsummary="true" haltonfailure="true" outputtoformatters="true">
+        <mkdir dir="instrumented"/>
+        <mkdir dir="reports"/>
+        <javac destdir="out" debug="true" includeantruntime="false">
+            <src path="src;test"/>
             <classpath>
                 <pathelement location="lib/junit-4.12.jar"/>
                 <pathelement location="lib/hamcrest-core-1.3.jar"/>
+                <pathelement location="lib/cobertura-2.1.1.jar"/>
                 <pathelement location="lib/mockito-all-1.9.5.jar"/>
+                <pathelement location="lib/system-rules-1.12.0-javadoc.jar"/>
+                <pathelement location="lib/system-rules-1.12.0-sources.jar"/>
                 <pathelement location="lib/system-rules-1.12.0.jar"/>
-                <pathelement location="lib/codecover-batch-1.0/lib/codecover-ant.jar"/>
-                <pathelement location="out"/>
             </classpath>
+        </javac>
+    </target>
 
-            <batchtest fork="yes" haltonfailure="true">
-                <fileset dir="out" includes="**/*Test*.class"/>
-            </batchtest>
-            <formatter type="brief" usefile="false"/>
-        </junit>
+    <target name="instrument" depends="build">
+        <cobertura-instrument todir="instrumented">
+            <ignore regex="org.slf4j.*"/>
+            <fileset dir="./out">
+                <include name="**/*.class"/>
+                <exclude name="**/*Test*.class"/>
+            </fileset>
+        </cobertura-instrument>
     </target>
 
     <target name="clean" description="clean previous output directory">
         <delete dir="out"/>
-        <delete>
-            <fileset dir="." includes="*.clf"/>
-        </delete>
-        <delete file="codecover.xml"/>
-        <delete file="report.html"/>
-        <delete dir="report.html-files"/>
+        <delete dir="reports"/>
+        <delete dir="instrumented"/>
+        <delete file="cobertura.log"/>
+        <delete file="cobertura.ser"/>
     </target>
 
-    <target name="buildJar" depends="compile">
-        <jar destfile="lib/${project.name}.jar"
-             basedir="out"
-             excludes="**/*Test*.class">
+    <target name="build-jar" depends="build">
+        <jar destfile="lib/${project.name}.jar" basedir="out" excludes="**/Test.class">
             <manifest>
-                <attribute name="Main-Class" value="${package.name}.BibliotecaApp"/>
+                <attribute name="Main-Class" value="${package.name}.${main.name}"/>
             </manifest>
         </jar>
     </target>
 
-    <target name="run" depends="buildJar">
-        <java fork="true" failonerror="yes" classname="${package.name}.BibliotecaApp">
+    <target name="run" depends="build-jar">
+        <java fork="true" failonerror="yes" classname="${package.name}.${main.name}">
             <classpath>
                 <path location="lib/${project.name}.jar"/>
             </classpath>
         </java>
     </target>
 
-    <target name="instrument-sources" depends="clean">
-        <codecover>
-            <instrument containerId="c" language="java" destination="instrumented-out" charset="utf-8"
-                        copyUninstrumented="yes">
-                <source dir="src">
-                    <include name="**/*.java"/>
-                </source>
-            </instrument>
-            <save containerId="c" filename="codecover.xml"/>
-        </codecover>
+    <target name="runjUnit" depends="build">
+        <junit printsummary="yes" haltonfailure="true" fork="true" forkmode="once">
+            <classpath location="./instrumented"/>
+            <classpath location="lib/junit-4.12.jar"/>
+            <classpath location="lib/hamcrest-core-1.3.jar"/>
+            <classpath location="lib/mockito-all-1.9.5.jar"/>
+            <classpath location="lib/system-rules-1.12.0-javadoc.jar"/>
+            <classpath location="lib/system-rules-1.12.0-sources.jar"/>
+            <classpath location="lib/system-rules-1.12.0.jar"/>
+            <classpath location="out"/>
+            <classpath refid="cobertura.classpath"/>
+            <formatter type="xml"/>
+            <batchtest todir="reports" fork="yes">
+                <fileset dir="test">
+                    <include name="**/*Test*"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        <junitreport todir="reports">
+            <fileset dir="reports">
+                <include name="TEST-*.xml" />
+            </fileset>
+            <report format="frames" todir="reports"/>
+        </junitreport>
     </target>
 
-    <target name="compile-instrumented" depends="instrument-sources">
-        <javac srcdir="instrumented-out" destdir="instrumented-out" encoding="utf-8" target="1.5" debug="true"
-               classpath="lib/codecover-batch-1.0/lib/codecover-instrumentation-java.jar"
-               includeAntRuntime="false"></javac>
+    <target name="coverage-report">
+        <cobertura-report srcdir="src" destdir="reports" format="xml" />
     </target>
 
-    <target name="run-instrumented" depends="compile-instrumented">
-        <java classpath="instrumented-out:lib/codecover-batch-1.0/lib/codecover-instrumentation-java.jar" fork="true"
-              failonerror="true" classname="com.twu.biblioteca.BibliotecaApplication">
-            <jvmarg value="-Dorg.codecover.coverage-log-file=test.clf"/>
-        </java>
+    <target name="summary-coverage-report">
+        <cobertura-report srcdir="src" destdir="reports" format="summaryXml" />
     </target>
 
-    <target name="create-report" depends="run-instrumented">
-        <codecover>
-            <load containerId="c" filename="codecover.xml"/>
-            <analyze containerId="c" coverageLog="test.clf" name="Test Session"/>
-            <save containerId="c" filename="codecover.xml"/>
-            <report containerId="c" destination="report.html"
-                    template="lib/codecover-batch-1.0/report-templates/HTML_Report_hierarchic.xml">
-            </report>
-        </codecover>
+    <target name="alternate-coverage-report">
+        <cobertura-report destdir="reports">
+            <fileset dir="src">
+                <include name="**/*.java"/>
+            </fileset>
+        </cobertura-report>
     </target>
 
+    <target name="coverage" depends="build, instrument, runjUnit, coverage-report, summary-coverage-report, alternate-coverage-report"/>
 </project>

@@ -15,7 +15,7 @@ public class Library {
 
     public void displayLibraryBooks() {
         ConsoleView consoleView = new ConsoleView("List of Books:");
-        consoleView.BookView(books);
+        consoleView.bookListView(books);
     }
 
     public void checkOutBook(String userChoice) {

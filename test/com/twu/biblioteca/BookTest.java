@@ -15,14 +15,6 @@ public class BookTest {
     }
 
     @Test
-    public void shouldFormatDisplayDetails() {
-        Book book = new Book("Abc", "Def", 1900);
-        book.toString();
-
-        assertEquals("Abc\tDef\t1900", book.toString());
-    }
-
-    @Test
     public void shouldNotBeNull() {
         Book book = new Book("Abc", "Def", 1900);
 

@@ -16,7 +16,7 @@ public class BibliotecaApplication {
         ConsoleView consoleView = new ConsoleView("Welcome to Biblioteca!!!");
         MenuOptions menuOptions = new MenuOptions();
         do {
-            consoleView.MenuView();
+            consoleView.menuView();
             menuOptions.optionHandler(in.nextLine());
         } while (true);
     }

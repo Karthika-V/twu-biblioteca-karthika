@@ -21,7 +21,7 @@ public class MenuOptionsTest {
     public void shouldListOutMenuForUser() {
         MenuOptions menuOptions = new MenuOptions();
         menuOptions.toString();
-        assertEquals("Hi User!!!\nYou have the following Options:\nChoose One\n1:List Books\n2:Checkout Book\n3:Return Book\nq:QUIT\n", menuOptions.toString());
+        assertEquals("1:List Books\n2:Checkout Book\n3:Return Book\nq:QUIT\n", menuOptions.toString());
     }
 
     @Test

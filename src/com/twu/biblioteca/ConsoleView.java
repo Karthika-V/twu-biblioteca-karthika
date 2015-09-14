@@ -13,7 +13,7 @@ public class ConsoleView {
         System.out.println(fs);
     }
 
-    public void MenuView() {
+    public void menuView() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Hi User!!!\nYou have the following Options:\nChoose One\n");
         MenuOptions menuOptions = new MenuOptions();
@@ -21,16 +21,17 @@ public class ConsoleView {
         System.out.println(stringBuilder);
     }
 
-    public void BookView(ArrayList<Book> books) {
-        System.out.println("List of Books:");
+    public void bookListView(ArrayList<Book> books) {
         String divider = "------------------------------------------------------------";
-        System.out.println(divider);
-        System.out.println(String.format("%-23s %-23s %-23s", "Title", "Author", "Published Year"));
-        System.out.println(divider);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(divider);
+        stringBuilder.append(String.format("%-23s %-23s %-23s", "Title", "Author", "Published Year"));
+        stringBuilder.append(divider);
         for (Book book : books) {
-            System.out.println(book.toString());
+            stringBuilder.append(book.toString());
         }
-        System.out.println(divider);
+        stringBuilder.append(divider);
+        System.out.println(stringBuilder);
     }
 
 }
