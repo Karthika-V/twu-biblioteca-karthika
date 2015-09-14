@@ -35,7 +35,6 @@ public class MenuOptions {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Hi User!!!\nYou have the following Options:\nChoose One\n");
         for (int i = 0; i < optionsList.size(); i++) {
             stringBuilder.append(optionsList.get(i) + "\n");
         }

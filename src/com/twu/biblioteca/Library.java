@@ -14,15 +14,8 @@ public class Library {
     }
 
     public void displayLibraryBooks() {
-        System.out.println("List of Books:");
-        String divider = "------------------------------------------------------------";
-        System.out.println(divider);
-        System.out.println(String.format("%-23s %-23s %-23s","Title","Author","Published Year"));
-        System.out.println(divider);
-        for (Book book : books) {
-            System.out.println(book.toString());
-        }
-        System.out.println(divider);
+        ConsoleView consoleView = new ConsoleView("List of Books:");
+        consoleView.BookView(books);
     }
 
     public void checkOutBook(String userChoice) {

@@ -14,7 +14,7 @@ public class BibliotecaApplicationTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         BibliotecaApplication bibliotecaApplication = new BibliotecaApplication();
-        bibliotecaApplication.displayWelcomeMessage();
+        bibliotecaApplication.start();
 
         assertEquals("Welcome to Biblioteca!!!\n", outContent.toString());
     }

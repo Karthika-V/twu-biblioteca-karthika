@@ -12,15 +12,11 @@ public class BibliotecaApplication {
         bibliotecaApplication.start();
     }
 
-    public void displayWelcomeMessage() {
-        System.out.println("Welcome to Biblioteca!!!");
-    }
-
     public void start() {
-        displayWelcomeMessage();
+        ConsoleView consoleView = new ConsoleView("Welcome to Biblioteca!!!");
         MenuOptions menuOptions = new MenuOptions();
         do {
-            System.out.println(menuOptions.toString());
+            consoleView.MenuView();
             menuOptions.optionHandler(in.nextLine());
         } while (true);
     }
