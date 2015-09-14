@@ -20,19 +20,15 @@ public class MenuOptions {
 
     public void optionHandler(String option) {
         if (option.contentEquals("1")) {
-            library.displayLibraryBooks();
+            new ListBookOption(library).performOperation();
         } else if (option.contentEquals("q")) {
-            System.exit(0);
+            new QuitOption().performOperation();
         } else if (option.contentEquals("2")) {
-            System.out.println("Enter the Book name:");
-            String bookChoice = in.nextLine();
-            library.checkOutBook(bookChoice);
+            new CheckOutOption(library).performOperation();
         } else if (option.contentEquals("3")) {
-            System.out.println("Enter the Book name:");
-            String bookChoice = in.nextLine();
-            library.checkInBook(library.returnBook(bookChoice));
+            new CheckInBookOption(library).performOperation();
         } else {
-            System.out.println("Select a valid option!");
+            new InvalidOption().performOperation();
         }
     }
 
